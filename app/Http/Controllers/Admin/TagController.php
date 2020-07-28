@@ -29,6 +29,7 @@ class TagController extends Controller
         return view('admin.tags.index', compact('tags'));
     }
 
+    /*Commit*/
     /**
      * Show the form for creating a new resource.
      *
