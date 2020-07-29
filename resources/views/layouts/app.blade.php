@@ -48,39 +48,28 @@
 
                         <!-- Authentication Links -->
 
-                        <!-- Si eres un invitado, muestra esto -->
+
+
+
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         
                         @else
-                        @if(Auth::user()->role_id == 3)
+                        @if(Auth::check())
+                            @if (Auth::user()->esEstandar())
                             <li><a href="{{ route('contact.index') }}">Contacto</a></li>
+                    
+                        @elseif(Auth::user()->esAdmin())
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    Categorías <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                @foreach($categories as $category)
-                                    <li>
-                                        <a href="{{ route('category', $post->category->slug) }}">
-                                            {{ $category->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                                </ul>
-                            </li>
-
-                        @elseif(Auth::user()->role_id == 1)
                         <!-- Si no eres un invitado, muestra esto otro -->
+                        
                             <li><a href="{{ route('users.index') }}">Usuarios</a></li>
                             <li><a href="{{ route('tags.index') }}">Etiquetas</a></li>
                             <li><a href="{{ route('categories.index') }}">Categorías</a></li>
                             <li><a href="{{ route('posts.index') }}">Entradas</a></li>
                         @endif
-                        
+                        @endif
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -100,7 +89,8 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
+                        @endGuest
+
                     </ul>
                 </div>
             </div>

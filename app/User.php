@@ -32,25 +32,35 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    /*
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
-
-    /*
+*/
+    
     public function role()
     {
         return $this->belongsTo('App\Role');
     }
-    */
+    
 
     public function esAdmin()
     {
         if($this->role->nombre_rol=='superadministrador'){
             return true;
         }
+
         return false;
     }
 
+    public function esEstandar()
+    {
+        if($this->role->nombre_rol=='estandar'){
+            return true;
+        }
+        
+        return false;
+    }
     
 }

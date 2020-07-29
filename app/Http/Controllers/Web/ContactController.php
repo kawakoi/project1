@@ -13,7 +13,7 @@ class ContactController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('EsEstandar');
     }
     
     /**
@@ -23,10 +23,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $categories  = Category::orderBy('id', 'ASC')->paginate();
+        //$categories  = Category::orderBy('id', 'ASC')->paginate();
         $post     = Post::orderBy('id', 'DESC')->paginate();
   
-        return view('contact.index', compact('categories', 'post'));
+        return view('contact.index', compact('post'));
     }
 
     public function contact(Request $request){
